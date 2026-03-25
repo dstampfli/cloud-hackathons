@@ -26,6 +26,8 @@ Teams are not left on their own to solve the challenges. Coaches work with each 
   > In this hack, we'll step into the role of a creative director at a cutting-edge ad agency. Our mission is to create a compelling 20-30 second video advertisement for a revolutionary new product using Google Cloud's generative AI tools.
 - [Introduction to Agents with ADK](./hacks/adk-intro/README.md)
   > This is an introduction to Agentic AI using Agent Development Kit (ADK) framework. We'll be introducing various ADK concepts step-by-step, starting with a single agent and progressively building a tool-using, collaborative multi-agent system.
+- [Introduction to Agents with ADK (BPSS Edition)](./hacks/bpss-adk-intro/README.md)
+  > A two-part version of the ADK intro hack for the Vista BPSS conference. Part 1 (onsite) covers ADK fundamentals — setup, tools, and session state. Part 2 (remote) covers advanced topics — multi-agent orchestration, MCP, and A2A protocols. Students fork the repo to preserve their work between sessions.
 - [Modernizing Classic Data Warehousing with BigQuery](./hacks/bq-dwh/README.md)
   > In this hack we'll implement a classic data warehouse using modern tools, such as Cloud Storage, BigQuery, Dataform and Looker Studio. We'll start with a modified version of the well known AdventureWorks OLTP database, and we'll implement a dimensional model to report on business questions using a BI visualization tool.
 - [Open Lakehouse with Apache Iceberg](./hacks/bq-olh/README.md)
