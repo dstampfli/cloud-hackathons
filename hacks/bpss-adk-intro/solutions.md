@@ -41,10 +41,9 @@ This hack is split into two parts for the Vista BPSS conference.
 
 ### Transition Notes for Coaches
 
-- At the end of Part 1, ensure all teams have saved their work locally in Cloud Shell. This is critical for Part 2 continuity.
-- Remind participants that their Qwiklabs environment will remain active for Part 2.
+- At the end of Part 1, **ensure all teams have pushed their code to their GitHub fork**. This is critical — the Qwiklabs environment from Part 1 will expire, and their fork is the only way to preserve their work.
 - For Part 2, set up a Google Meet or Chat Space for remote coaching and Q&A.
-- At the start of Part 2, have participants verify their environment is still accessible and their code from Part 1 is intact.
+- At the start of Part 2, students will start a **new Qwiklabs lab** (same lab definition) to get a fresh GCP environment with all infrastructure re-provisioned. They then clone their fork and set up the environment again.
 
 ## Coach Prerequisites
 
@@ -106,10 +105,12 @@ Required Google Cloud resources:
 
 ### Notes & Guidance
 
-The first step is to clone the repository from GitHub.
+The first step is to fork and clone the repository from GitHub.
+
+Students should navigate to [https://github.com/dstampfli/gcp-adk-intro-agent](https://github.com/dstampfli/gcp-adk-intro-agent) and click "Fork" to create their own copy. Then clone their fork:
 
 ```shell
-git clone https://github.com/dstampfli/gcp-adk-intro-agent.git
+git clone https://github.com/<their-github-username>/gcp-adk-intro-agent.git
 ```
 
 Once the repository is cloned, the best practice is to start with a virtual environment. There are multiple tools to create virtual environments and install packages but we'll stick to the defaults.
@@ -187,6 +188,8 @@ resource_scanner_agent = Agent(
 
 Format of the response is not relevant for this challenge as long as all of the virtual machines are returned.
 
+Make sure that the changes are pushed to their fork.
+
 
 ## Challenge 3: Sticky Notes
 
@@ -208,18 +211,36 @@ resource_scanner_agent = Agent(
 )
 ```
 
+Make sure that the changes are pushed to their fork.
 
 > [!IMPORTANT]
-> This is the end of Part 1. Ensure all teams have saved their work locally in Cloud Shell before wrapping up the onsite session. Remind participants about the Part 2 schedule and how to access the remote coaching session.
+> This is the end of Part 1. **Ensure all teams have pushed their code to their GitHub fork** before wrapping up the onsite session. The Qwiklabs environment will expire — the fork is how they carry their work into Part 2. Remind participants about the Part 2 schedule and how to access the remote coaching session.
 
 ---
 
 ## Part 2: Remote
 
+Students should start a **new Qwiklabs lab** (same lab definition as Part 1) to provision a fresh GCP environment. Once the lab is running, they clone their fork and set up the environment:
+
+```shell
+git clone https://github.com/<their-github-username>/gcp-adk-intro-agent.git
+cd gcp-adk-intro-agent
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+REGION=us-central1
+cat > janitor/.env <<EOF
+GOOGLE_GENAI_USE_VERTEXAI=TRUE
+GOOGLE_CLOUD_PROJECT=$GOOGLE_CLOUD_PROJECT
+GOOGLE_CLOUD_LOCATION=$REGION
+EOF
+```
+
+Their code from Part 1 (Challenges 1-3) should already be in the fork. They can verify by checking `janitor/agent.py`.
+
 ## Challenge 4: Agent Symphony
 
 ### Notes & Guidance
-
 
 ```python
 # keep other imports
@@ -251,6 +272,7 @@ root_agent = orchestrator_agent
 > [!NOTE]
 > Sometimes after running both agents, the `resources` state variable seems to be empty, but as long as `idle_resources` provides the correct set of instances, it should be fine.
 
+Make sure that the changes are pushed to their fork.
 
 ## Challenge 5: MCP: Universal Tooling
 
@@ -337,6 +359,7 @@ gcloud compute instances list  \
     --format='value(name, labels)'
 ```
 
+Make sure that the changes are pushed to their fork.
 
 ## Challenge 6: A2A: Remote Agent Power
 
@@ -410,3 +433,5 @@ gcloud compute instances list  \
     --project=$GOOGLE_CLOUD_PROJECT \
     --format='value(name, status)'
 ```
+
+Make sure that the changes are pushed to their fork.

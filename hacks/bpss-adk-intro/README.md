@@ -13,7 +13,7 @@ Our objective is to build a *Cloud Janitor* an AI-powered agentic solution that 
 In this hack, we'll use the Agent Development Kit (ADK) framework to develop this solution step-by-step, starting with a single agent and progressively building a collaborative, multi-agent system.
 
 > [!IMPORTANT]
-> This hack is split into two parts. **Part 1** is completed onsite at the Vista BPSS conference. **Part 2** is completed remotely after the event. Both parts use the same GCP environment.
+> This hack is split into two parts. **Part 1** is completed onsite at the Vista BPSS conference. **Part 2** is completed remotely after the event. Each part uses its own Qwiklabs environment, but your code carries over via your GitHub fork.
 
 ## Learning Objectives
 
@@ -44,6 +44,7 @@ This hack will help you explore the following tasks:
 
 - Basic knowledge of GCP
 - Basic knowledge of Python
+- A GitHub account
 - Access to a GCP environment
 
 > [!NOTE]
@@ -69,17 +70,21 @@ We're taking baby steps, let's get started with our development environment. Thi
 
 ### Description
 
-We've already prepared a code base for you in a public GitHub repository. Clone it on Cloud Shell, create a virtual environment and install the requirements.
+We've already prepared a code base for you in a public GitHub repository. First, fork the repository to your own GitHub account, then clone your fork on Cloud Shell, create a virtual environment and install the requirements.
+
+- Fork the repository: [https://github.com/dstampfli/gcp-adk-intro-agent](https://github.com/dstampfli/gcp-adk-intro-agent)
+- Clone your fork:
 
 ```shell
-git clone https://github.com/dstampfli/gcp-adk-intro-agent.git
+git clone https://github.com/<your-github-username>/gcp-adk-intro-agent.git
 ```
 
 Once everything is set up, run `adk web` and make sure that the agent responds back.
 
 ### Success Criteria
 
-- The Git repository has been cloned to Cloud Shell.
+- The repository has been forked to your GitHub account.
+- Your fork has been cloned to Cloud Shell.
 - You get no errors when you greet the agent from the `adk web` UI.
 - No code was modified.
 
@@ -107,7 +112,7 @@ This is where *Tools* come into the picture: they provide a way for LLMs/agents 
 
 ### Description
 
-The provided code base already has a function that can look up the resources running in our project in `tools.py`. Update the `resource_scanner_agent` to use that function as a tool.
+The provided code base already has a function that can look up the resources running in our project in `tools.py`. Update the `resource_scanner_agent` to use that function as a tool. Once everything works as expected, push the changes to your fork.
 
 ### Success Criteria
 
@@ -120,6 +125,8 @@ The provided code base already has a function that can look up the resources run
   - gce-dev-lnx-tomcat-002
   - gce-prd-lnx-env-setup
   ```
+
+- The changes have been pushed to your GitHub fork.
 
 
 ### Learning Resources
@@ -146,6 +153,7 @@ Modify the `resource_scanner_agent` to save the list of all virtual machines in 
 
 - The Agent has been configured to store the list of virtual machines in the session state.
 - The session state contains the same set of virtual machines using the correct schema when prompted to list the resources.
+- The changes have been pushed to your GitHub fork.
 
 ### Learning Resources
 
@@ -161,8 +169,8 @@ Modify the `resource_scanner_agent` to save the list of all virtual machines in 
 
 ## Part 2: Remote
 
-> [!NOTE]
-> Part 2 is completed remotely after the onsite event. Make sure your GCP environment is still active and your code from Part 1 is saved in Cloud Shell.
+> [!IMPORTANT]
+> Part 2 is completed remotely after the onsite event. Start a new Qwiklabs lab to provision a fresh GCP environment. Then clone your GitHub fork (which has your Part 1 work), set up your virtual environment, and continue from where you left off.
 
 ## Challenge 4: Agent Symphony
 
@@ -188,6 +196,7 @@ Then create a new sequential agent `orchestrator_agent` that calls the `resource
 
 - The Agent runs both `resource_scanner_agent` and `resource_monitor_agent` in sequence and updates the session store.
 - The session state contains `gce-dev-lnx-tomcat-001`,  `gce-dev-lnx-tomcat-002` and `gce-sbx-lnx-blob-001` (and their details) for `idle_resources` using the correct schema when prompted to find the idle resources.
+- The changes have been pushed to your GitHub fork.
 
 ### Learning Resources
 
@@ -221,6 +230,7 @@ Then add the `resource_labeler_agent` to the `orchestrator_agent` sequence.
 - The Agent runs `resource_scanner_agent`, `resource_monitor_agent` and `resource_labeler_agent` in sequence.
 - The instances `gce-dev-lnx-tomcat-001`,  `gce-dev-lnx-tomcat-002` have the label `janitor-scheduled` with the value set to 7 days in the future.
 - The instance `gce-sbx-lnx-blob-001` is not updated and keeps `janitor-scheduled` label set to yesterday.
+- The changes have been pushed to your GitHub fork.
 
 ### Learning Resources
 
@@ -255,6 +265,7 @@ Create a new agent `resource_cleaner_agent` that uses A2A protocol to connect to
   - gce-prd-lnx-env-setup
   ```
 
+- The changes have been pushed to your GitHub fork.
 
 ### Learning Resources
 
