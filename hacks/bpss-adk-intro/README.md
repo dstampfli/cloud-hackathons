@@ -54,10 +54,6 @@ This hack will help you explore the following tasks:
 - Murat Eken
 - Daniel Stampfli
 
----
-
-## Part 1: Onsite
-
 ## Challenge 1: First Scan
 
 ### Introduction
@@ -163,13 +159,6 @@ Modify the `resource_scanner_agent` to save the list of all virtual machines in 
 ### Tips
 
 - You can use `adk web` UI to inspect the session state (and to verify that everything works as expected).
-
----
-
-## Part 2: Remote
-
-> [!IMPORTANT]
-> Part 2 is completed remotely after the onsite event. Start a new Qwiklabs lab to provision a fresh GCP environment. Then clone your GitHub fork (which has your Part 1 work), set up your virtual environment, and continue from where you left off.
 
 ## Challenge 4: Agent Symphony
 
