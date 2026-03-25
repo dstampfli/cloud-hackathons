@@ -13,8 +13,10 @@
 # limitations under the License.
 schema_version: 2
 default_locale: en
-title: "[gHacks] “Introduction"
-description: ""
+title: "[gHacks] Introduction to Agents with ADK (BPSS)"
+description: "A two-part gHack for the Vista BPSS conference. Using the Agent Development Kit (ADK) framework,
+  participants build a Cloud Janitor multi-agent solution step-by-step. Part 1 (onsite) covers ADK fundamentals,
+  Part 2 (remote) covers advanced multi-agent orchestration, MCP, and A2A protocols."
 instruction:
   type: md
   uri: instructions/en.md
@@ -23,13 +25,14 @@ max_duration: 420
 credits: 0
 level: fundamental
 tags:
-product_tags: 
+product_tags:
 role_tags:
 domain_tags:
 environment:
   resources:
   - type: gcp_project
     id: project
+    variant: gcp_medium_extra
     startup_script:
       type: qwiklabs
       path: artifacts
@@ -87,6 +90,7 @@ environment:
     reference: user_5.username
   - label: Password 5
     reference: user_5.password
-
+  - label: Source repository
+    reference: project.startup_script.source_repo
   - label: Project ID
     reference: project.project_id
