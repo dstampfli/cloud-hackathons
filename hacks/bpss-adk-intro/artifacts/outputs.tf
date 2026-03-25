@@ -14,7 +14,3 @@
 output "project_id" {
     value = var.gcp_project_id
 }
-
-output "source_repo" {
-    value = google_sourcerepo_repository.repo.url
-}

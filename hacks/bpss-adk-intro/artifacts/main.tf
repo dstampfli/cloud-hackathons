@@ -19,7 +19,6 @@ resource "google_project_service" "default" {
     "iam.googleapis.com",
     "storage.googleapis.com",
     "compute.googleapis.com",
-    "sourcerepo.googleapis.com",
     "cloudbuild.googleapis.com",
     "artifactregistry.googleapis.com",
     "cloudfunctions.googleapis.com",
@@ -111,11 +110,6 @@ data "google_compute_network" "default_network" {
   ]
 }
 
-resource "google_sourcerepo_repository" "repo" {
-  name       = "ghacks-adk-intro"
-  depends_on = [google_project_service.default]
-}
-
 resource "google_service_account" "build_sa" {
   account_id   = "sa-build"
   display_name = "Build Service Account"
@@ -138,7 +132,6 @@ resource "google_service_account" "startup_vm_sa" {
 resource "google_project_iam_member" "startup_vm_sa_roles" {
   project = var.gcp_project_id
   for_each = toset([
-    "roles/source.admin",
     "roles/run.sourceDeveloper",
     "roles/iam.serviceAccountUser",
     "roles/logging.logWriter"
@@ -185,7 +178,6 @@ resource "google_compute_instance" "startup_vm" {
   metadata_startup_script = templatefile("${path.module}/setup.tftpl", {
     gcp_project_id = var.gcp_project_id,
     gcp_region     = var.gcp_region,
-    source_repo    = google_sourcerepo_repository.repo.url,
     build_sa       = google_service_account.build_sa.email,
   })
 
@@ -200,7 +192,7 @@ resource "google_compute_instance" "test_vms" {
   for_each     = { for vm in local.test_vms : vm.name => vm }
 
   name         = each.value.name
-  machine_type = "n1-standard-1"
+  machine_type = "e2-standard-2"
 
   boot_disk {
     initialize_params {

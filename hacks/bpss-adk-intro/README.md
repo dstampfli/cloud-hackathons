@@ -69,7 +69,11 @@ We're taking baby steps, let's get started with our development environment. Thi
 
 ### Description
 
-We've already prepared a code base for you and put it in a Git repository (your coach will provide you the link). Clone that on Cloud Shell, create a virtual environment and install the requirements.
+We've already prepared a code base for you in a public GitHub repository. Clone it on Cloud Shell, create a virtual environment and install the requirements.
+
+```shell
+git clone https://github.com/dstampfli/gcp-adk-intro-agent.git
+```
 
 Once everything is set up, run `adk web` and make sure that the agent responds back.
 
@@ -103,7 +107,7 @@ This is where *Tools* come into the picture: they provide a way for LLMs/agents 
 
 ### Description
 
-The provided code base already has a function that can look up the resources running in our project in `tools.py`. Update the `resource_scanner_agent` to use that function as a tool. Once everything works as expected, push the changes to the repository.
+The provided code base already has a function that can look up the resources running in our project in `tools.py`. Update the `resource_scanner_agent` to use that function as a tool.
 
 ### Success Criteria
 
@@ -117,7 +121,6 @@ The provided code base already has a function that can look up the resources run
   - gce-prd-lnx-env-setup
   ```
 
-- The changes have been pushed to the remote Git repository.
 
 ### Learning Resources
 
@@ -143,7 +146,6 @@ Modify the `resource_scanner_agent` to save the list of all virtual machines in 
 
 - The Agent has been configured to store the list of virtual machines in the session state.
 - The session state contains the same set of virtual machines using the correct schema when prompted to list the resources.
-- The changes have been pushed to the remote Git repository.
 
 ### Learning Resources
 
@@ -160,7 +162,7 @@ Modify the `resource_scanner_agent` to save the list of all virtual machines in 
 ## Part 2: Remote
 
 > [!NOTE]
-> Part 2 is completed remotely after the onsite event. Make sure your GCP environment is still active and your code from Part 1 has been pushed to the repository.
+> Part 2 is completed remotely after the onsite event. Make sure your GCP environment is still active and your code from Part 1 is saved in Cloud Shell.
 
 ## Challenge 4: Agent Symphony
 
@@ -186,7 +188,6 @@ Then create a new sequential agent `orchestrator_agent` that calls the `resource
 
 - The Agent runs both `resource_scanner_agent` and `resource_monitor_agent` in sequence and updates the session store.
 - The session state contains `gce-dev-lnx-tomcat-001`,  `gce-dev-lnx-tomcat-002` and `gce-sbx-lnx-blob-001` (and their details) for `idle_resources` using the correct schema when prompted to find the idle resources.
-- The changes have been pushed to the remote Git repository.
 
 ### Learning Resources
 
@@ -220,7 +221,6 @@ Then add the `resource_labeler_agent` to the `orchestrator_agent` sequence.
 - The Agent runs `resource_scanner_agent`, `resource_monitor_agent` and `resource_labeler_agent` in sequence.
 - The instances `gce-dev-lnx-tomcat-001`,  `gce-dev-lnx-tomcat-002` have the label `janitor-scheduled` with the value set to 7 days in the future.
 - The instance `gce-sbx-lnx-blob-001` is not updated and keeps `janitor-scheduled` label set to yesterday.
-- The changes have been pushed to the remote Git repository.
 
 ### Learning Resources
 
@@ -255,7 +255,6 @@ Create a new agent `resource_cleaner_agent` that uses A2A protocol to connect to
   - gce-prd-lnx-env-setup
   ```
 
-- The changes have been pushed to the remote Git repository.
 
 ### Learning Resources
 

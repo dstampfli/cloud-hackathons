@@ -7,9 +7,6 @@ Welcome to the coach's guide for Introduction to Agents with ADK gHack (BPSS Edi
 > [!NOTE]
 > If you are a gHacks participant, this is the answer guide. Don't cheat yourself by looking at this guide during the hack!
 
-> [!IMPORTANT]
-> As of June 2024 *Cloud Source Repositories* is [end of sale](https://cloud.google.com/source-repositories/docs/release-notes#June_17_2024). However, any organization that has created at least one CSR repository in the past, will still have access to existing repositories and will be able to create new ones. If you're running this in a Qwiklabs environment you're good to go, but if you're running this in **your** own environment, please verify that you have access to *Cloud Source Repositories* in your organization.
-
 ## Coach's Guides
 
 ## Challenges
@@ -44,10 +41,10 @@ This hack is split into two parts for the Vista BPSS conference.
 
 ### Transition Notes for Coaches
 
-- At the end of Part 1, ensure all teams have pushed their code to the repository. This is critical for Part 2 continuity.
+- At the end of Part 1, ensure all teams have saved their work locally in Cloud Shell. This is critical for Part 2 continuity.
 - Remind participants that their Qwiklabs environment will remain active for Part 2.
 - For Part 2, set up a Google Meet or Chat Space for remote coaching and Q&A.
-- At the start of Part 2, have participants verify their environment is still accessible and pull the latest code.
+- At the start of Part 2, have participants verify their environment is still accessible and their code from Part 1 is intact.
 
 ## Coach Prerequisites
 
@@ -76,7 +73,7 @@ This hack requires students to have access to a Google Cloud project where they 
 
 Required Google Cloud resources:
 - Compute Engine (VMs for testing)
-- Cloud Source Repositories (code repository)
+- GitHub repository (agent code base)
 - Cloud Run (MCP and A2A servers)
 - Vertex AI (Gemini model access)
 - Artifact Registry (Docker images)
@@ -109,23 +106,16 @@ Required Google Cloud resources:
 
 ### Notes & Guidance
 
-The first step is to clone the repository that has been created for the team.
-
-> [!IMPORTANT]
-> We're using Cloud Source Repositories for this hack, which still uses `master` as the default branch. The easiest option is to stick to that.
+The first step is to clone the repository from GitHub.
 
 ```shell
-git clone https://source.developers.google.com/p/$GOOGLE_CLOUD_PROJECT/r/ghacks-adk-intro
+git clone https://github.com/dstampfli/gcp-adk-intro-agent.git
 ```
 
-Since we're using Cloud Source Repositories, the authentication is done automatically through OAuth. If there are permission denied errors, make sure that the variable `$GOOGLE_CLOUD_PROJECT` is set (sometimes Cloud Shell starts without it being set correctly). If the challenges are run from another VM, either [SSH authentication](https://cloud.google.com/source-repositories/docs/authentication#ssh) would need to be set up, or `gcloud source repos clone` needs to be used (which requires setting up gcloud authentication on the VM first).
-
-If they get the message `warning: You appear to have cloned an empty repository`, they were too quick. The repository is initialized asynchronously at project startup and takes a minute or so. In that case they should retry (after deleting the empty repository, the `ghacks-adk-intro` directory).
-
-Once the repository is cloned, although it's not a hard requirement, the best practice is to start with a virtual environment. There are multiple tools to create virtual environments and install packages but we'll stick to the defaults.
+Once the repository is cloned, the best practice is to start with a virtual environment. There are multiple tools to create virtual environments and install packages but we'll stick to the defaults.
 
 ```shell
-cd ghacks-adk-intro
+cd gcp-adk-intro-agent
 python3 -m venv .venv
 source .venv/bin/activate
 ```
@@ -181,9 +171,7 @@ If you get authentication errors, make sure that the environment variables as de
 
 ### Notes & Guidance
 
-The new driver should follow the same steps to clone the repository and set up their environment.
-
-Then edit the `janitor/agent.py` to update the prompt and configure the tool.
+Edit the `janitor/agent.py` to update the prompt and configure the tool.
 
 ```python
 resource_scanner_agent = Agent(
@@ -199,15 +187,12 @@ resource_scanner_agent = Agent(
 
 Format of the response is not relevant for this challenge as long as all of the virtual machines are returned.
 
-Make sure that the changes are pushed to the repository so the next driver can pick up the changes.
 
 ## Challenge 3: Sticky Notes
 
 ### Notes & Guidance
 
-Again the new driver should follow the same steps for the first challenge to clone the repository (or pull the latest changes if they have already cloned it) and set up their environment (if they haven't done that already).
-
-Then edit the `janitor/agent.py` to update the prompt and configure the `output_key`. It's also possible to introduce another tool that stores things explicitly in the session state using the `CallContext` or `ToolContext` but it's much more work (see the official [docs](https://google.github.io/adk-docs/sessions/state/#how-state-is-updated-recommended-methods) for more details).
+Edit the `janitor/agent.py` to update the prompt and configure the `output_key`. It's also possible to introduce another tool that stores things explicitly in the session state using the `CallContext` or `ToolContext` but it's much more work (see the official [docs](https://google.github.io/adk-docs/sessions/state/#how-state-is-updated-recommended-methods) for more details).
 
 ```python
 resource_scanner_agent = Agent(
@@ -223,10 +208,9 @@ resource_scanner_agent = Agent(
 )
 ```
 
-Make sure that the changes are pushed to the repository so the next driver can pick up the changes.
 
 > [!IMPORTANT]
-> This is the end of Part 1. Ensure all teams have pushed their code before wrapping up the onsite session. Remind participants about the Part 2 schedule and how to access the remote coaching session.
+> This is the end of Part 1. Ensure all teams have saved their work locally in Cloud Shell before wrapping up the onsite session. Remind participants about the Part 2 schedule and how to access the remote coaching session.
 
 ---
 
@@ -236,7 +220,6 @@ Make sure that the changes are pushed to the repository so the next driver can p
 
 ### Notes & Guidance
 
-Again the new driver should follow the same steps for the first challenge to clone the repository (or pull the latest changes if they have already cloned it) and set up their environment (if they haven't done that already).
 
 ```python
 # keep other imports
@@ -268,13 +251,11 @@ root_agent = orchestrator_agent
 > [!NOTE]
 > Sometimes after running both agents, the `resources` state variable seems to be empty, but as long as `idle_resources` provides the correct set of instances, it should be fine.
 
-Make sure that the changes are pushed to the repository so the next driver can pick up the changes.
 
 ## Challenge 5: MCP: Universal Tooling
 
 ### Notes & Guidance
 
-Again the new driver should follow the same steps for the first challenge to clone the repository (or pull the latest changes if they have already cloned it) and set up their environment (if they haven't done that already).
 
 First step is to run the Cloud Run proxy to simplify things.
 
@@ -356,13 +337,11 @@ gcloud compute instances list  \
     --format='value(name, labels)'
 ```
 
-Make sure that the changes are pushed to the repository so the next driver can pick up the changes.
 
 ## Challenge 6: A2A: Remote Agent Power
 
 ### Notes & Guidance
 
-Again the new driver should follow the same steps for the first challenge to clone the repository (or pull the latest changes if they have already cloned it) and set up their environment (if they haven't done that already).
 
 First step is to run the Cloud Run proxy to simplify things.
 
