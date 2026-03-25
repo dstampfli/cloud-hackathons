@@ -28,17 +28,16 @@ This hack will help you explore the following tasks:
 
 ## Challenges
 
-### Part 1: Onsite (~3.5 hours)
-
 - Challenge 1: First Scan
 - Challenge 2: Equipping the Scanner
 - Challenge 3: Sticky Notes
-
-### Part 2: Remote (~3.5 hours)
-
 - Challenge 4: Agent Symphony
 - Challenge 5: MCP: Universal Tooling
 - Challenge 6: A2A: Remote Agent Power
+
+> [!NOTE]
+> **Part 1 (onsite, ~3.5 hours):** Challenges 1-3 cover ADK fundamentals — setup, tools, and session state.
+> **Part 2 (remote, ~3.5 hours):** Challenges 4-6 cover advanced topics — multi-agent orchestration, MCP, and A2A protocols.
 
 ## Prerequisites
 
